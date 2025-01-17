@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои проекты</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ff00;
+            background-color: #000;
+        }
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: black;
+            overflow: hidden;
+        }
+        .content {
+            padding: 80px 40px 40px;
+            animation: fadeIn 2s ease-in;
+            text-align: left;
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-top: 1.5rem;
+        }
+        p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #000;
+            border-bottom: 1px solid #00ff00;
+            padding: 10px 0;
+            z-index: 2;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #fff;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrix"></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="#">Мои проекты</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <h1>Мои проекты</h1>
+
+        <h2>1. Чат-бот для Telegram</h2>
+        <p>Чат-бот, разработанный с использованием Python и библиотеки aiogram. Поддерживает автоматическое реагирование на команды, предоставляет данные из различных API, включая погодные данные и курсы валют. Интегрирован с базой данных SQLite для хранения пользовательских настроек и истории запросов.</p>
+
+        <h2>2. Веб-приложение для управления задачами</h2>
+        <p>Веб-приложение, созданное с использованием Django. Позволяет пользователям регистрироваться, создавать задачи, отслеживать их статус и делиться задачами с другими пользователями. Использована PostgreSQL для хранения данных и Bootstrap для создания адаптивного интерфейса.</p>
+
+        <h2>3. API для обработки изображений</h2>
+        <p>RESTful API, разработанный на FastAPI, которое предоставляет функционал для обработки изображений, включая изменение размера, применение фильтров и конвертацию форматов. Хранение изображений осуществляется с использованием облачного хранилища, а документация API автоматически генерируется с помощью Swagger.</p>
+
+        <h2>4. Проект машинного обучения: Анализ настроений</h2>
+        <p>Создано приложение, которое анализирует настроения текстов с помощью алгоритмов машинного обучения. Использованы библиотеки Scikit-learn и TensorFlow для построения моделей классификации. В проекте собран большой датасет из Twitter, и результаты визуализированы с помощью Matplotlib и Seaborn. Также разработан веб-интерфейс для загрузки текстов и отображения анализа в реальном времени.</p>
+
+        <h2>5. Система мониторинга серверов</h2>
+        <p>Программа на Python для мониторинга состояния серверов. Позволяет отслеживать использование процессора, оперативной памяти, дискового пространства и сетевого трафика. Уведомления о сбоях отправляются через Telegram-бот. Использованы библиотеки psutil, asyncio и smtplib для интеграции с email.</p>
+    </div>
+    <script>
+        const canvas = document.createElement('canvas');
+        document.getElementById('matrix').appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        const matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0';
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+                ctx.fillText(char, x, y);
+
+                if (y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>
