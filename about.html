@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ff00;
+            background-color: #000;
+        }
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: black;
+            overflow: hidden;
+        }
+        .content {
+            padding: 40px;
+            animation: fadeIn 2s ease-in;
+            text-align: left;
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #000;
+            border-bottom: 1px solid #00ff00;
+            padding: 10px 0;
+            z-index: 2;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrix"></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="#">Обо мне</a></li>
+            <li><a href="projects.html">Мои проекты</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <h1>Обо мне</h1>
+        <p>Здравствуйте! Меня зовут Михаил, и я увлеченный разработчик, специализирующийся на Python.
+        Программирование для меня - это не только профессия, но и страсть, которую я развиваю уже более 4.5 лет.
+        За это время я смог реализовать себя в различных областях, от написания ботов до создания сложных веб-приложений и моделей машинного обучения.</p>
+
+        <h2>Ключевые навыки</h2>
+        <ul>
+            <li><strong>Языки программирования:</strong> Python (3 года), C++ (1.5 года).</li>
+            <li><strong>Фреймворки:</strong> Django, Flask, FastAPI.</li>
+            <li><strong>Базы данных:</strong> PostgreSQL, SQLite.</li>
+            <li><strong>Инструменты:</strong> Git, Docker, Linux (администрирование).</li>
+            <li><strong>Библиотеки:</strong>
+                <ul>
+                    <li><strong>Боты:</strong> aiogram, telethon.</li>
+                    <li><strong>Машинное обучение:</strong> TensorFlow, PyTorch.</li>
+                    <li><strong>Тестирование:</strong> pytest, unittest.</li>
+                    <li><strong>Работа с сетью:</strong> requests, socket.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>Образование</h2>
+        <p>Я окончил Военно-космическую академию имени А.Ф. Можайского, где получил фундаментальные знания в области навигационно-баллистического обеспечения и применения космической техники. Это образование помогло мне развить аналитическое мышление, внимание к деталям и способность решать сложные задачи.</p>
+
+        <h2>Опыт работы</h2>
+        <ul>
+            <li>
+                <strong>Фриланс (Kwork, Fiverr):</strong> апрель 2022 - настоящее время<br>
+                Создавал чат-ботов, разрабатывал пользовательские приложения и занимался моделями машинного обучения для клиентов со всего мира.
+            </li>
+            <li>
+                <strong>Системный администратор, COLIZEUM:</strong> август 2023 - октябрь 2024<br>
+                Поддерживал работоспособность компьютерных систем и сетей в крупном компьютерном клубе.
+            </li>
+            <li>
+                <strong>Преподаватель, Linkschool:</strong> октябрь 2024 - настоящее время<br>
+                Преподаю программирование и математику, помогая студентам освоить сложные темы доступным языком.
+            </li>
+        </ul>
+
+        <h2>Дополнительные навыки</h2>
+        <p>Владею английским языком на уровне B1, а также китайским и арабским на уровне A2. Эти знания помогают мне общаться с клиентами из разных стран и эффективно работать в международной среде.</p>
+
+        <h2>Личностные качества</h2>
+        <p>Я считаю себя целеустремленным, усердным и готовым к обучению. Обожаю решать сложные задачи, исследовать новые технологии и делиться своим опытом с другими. Моё хобби - это программирование, шахматы и изучение языков.</p>
+    </div>
+    <script>
+        const canvas = document.createElement('canvas');
+        document.getElementById('matrix').appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        const matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0';
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+                ctx.fillText(char, x, y);
+
+                if (y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>
+
