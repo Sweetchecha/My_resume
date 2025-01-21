@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вы в матрице!</title>
+    <title>Обо мне</title>
     <style>
         body {
             margin: 0;
@@ -22,28 +22,29 @@
             overflow: hidden;
         }
         .content {
-            padding: 80px 40px 40px;
-            text-align: center;
+            padding: 40px;
+            animation: fadeIn 2s ease-in;
+            text-align: left;
             max-width: 800px;
             margin: auto;
             position: relative;
             z-index: 1;
-            color: #00ff00;
-            opacity: 0;
-        }
-        h1, p {
-            display: inline-block;
-            opacity: 0;
-            animation: fadeInText 2s ease-out forwards;
         }
         h1 {
             font-size: 3rem;
-            animation-delay: 1s;
+            text-align: center;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
         }
         p {
             line-height: 1.8;
-            margin-top: 20px;
-            animation-delay: 3s;
+            margin-bottom: 1.5rem;
+        }
+        ul {
+            margin-left: 20px;
+            line-height: 1.8;
         }
         nav {
             position: fixed;
@@ -69,20 +70,39 @@
             color: #00ff00;
             text-decoration: none;
             font-size: 1.2rem;
-            transition: color 0.3s;
         }
-        nav ul li a:hover {
-            color: #fff;
-        }
-        @keyframes fadeInText {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
             }
+        }
+        .skills {
+            margin-top: 30px;
+        }
+        .skill-bar {
+            background-color: #444;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            height: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        .skill-bar .progress {
+            height: 100%;
+            background-color: #00ff00;
+            width: 0;
+            transition: width 2s ease;
+        }
+        .skill-bar .label {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #fff;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -91,14 +111,77 @@
     <nav>
         <ul>
             <li><a href="index.html">Главная</a></li>
-            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="#">Обо мне</a></li>
             <li><a href="projects.html">Мои проекты</a></li>
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
     </nav>
     <div class="content">
-        <h1>Привет, я Андрей</h1>
-        <p>Добро пожаловать на мой персональный сайт! Я Python разработчик с более чем 3-летним опытом. Исследуйте мои проекты и узнайте больше обо мне.</p>
+        <h1>Обо мне</h1>
+        <p>Здравствуйте! Меня зовут Андрей, и я увлеченный разработчик, специализирующийся на Python.
+        Программирование для меня - это не только профессия, но и страсть, которую я развиваю уже более 4.5 лет.
+        За это время я смог реализовать себя в различных областях, от написания ботов до создания сложных веб-приложений и моделей машинного обучения.</p>
+
+        <h2>Ключевые навыки</h2>
+        <ul>
+            <li><strong>Языки программирования:</strong> Python (3 года), C++ (1.5 года).</li>
+            <li><strong>Фреймворки:</strong> Django, Flask, FastAPI.</li>
+            <li><strong>Базы данных:</strong> PostgreSQL, SQLite.</li>
+            <li><strong>Инструменты:</strong> Git, Docker, Linux (администрирование).</li>
+            <li><strong>Библиотеки:</strong>
+                <ul>
+                    <li><strong>Боты:</strong> aiogram, telethon.</li>
+                    <li><strong>Машинное обучение:</strong> TensorFlow, PyTorch.</li>
+                    <li><strong>Тестирование:</strong> pytest, unittest.</li>
+                    <li><strong>Работа с сетью:</strong> requests, socket.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>Образование</h2>
+        <p>Я окончил Военно-космическую академию имени А.Ф. Можайского, где получил фундаментальные знания в области навигационно-баллистического обеспечения и применения космической техники. Это образование помогло мне развить аналитическое мышление, внимание к деталям и способность решать сложные задачи.</p>
+
+        <h2>Опыт работы</h2>
+        <ul>
+            <li>
+                <strong>Фриланс (Kwork, Fiverr):</strong> апрель 2022 - настоящее время<br>
+                Создавал чат-ботов, разрабатывал пользовательские приложения и занимался моделями машинного обучения для клиентов со всего мира.
+            </li>
+            <li>
+                <strong>Системный администратор, COLIZEUM:</strong> август 2023 - октябрь 2024<br>
+                Поддерживал работоспособность компьютерных систем и сетей в крупном компьютерном клубе.
+            </li>
+            <li>
+                <strong>Преподаватель, Linkschool:</strong> октябрь 2024 - настоящее время<br>
+                Преподаю программирование и математику, помогая студентам освоить сложные темы доступным языком.
+            </li>
+        </ul>
+
+        <h2>Дополнительные навыки</h2>
+        <p>Владею английским языком на уровне B1, а также китайским и арабским на уровне A2. Эти знания помогают мне общаться с клиентами из разных стран и эффективно работать в международной среде.</p>
+
+        <h2>Личностные качества</h2>
+        <p>Я считаю себя целеустремленным, усердным и готовым к обучению. Обожаю решать сложные задачи, исследовать новые технологии и делиться своим опытом с другими. Моё хобби - это программирование, шахматы и изучение языков.</p>
+
+        <div class="skills">
+            <h2>Мои навыки</h2>
+            <div class="skill-bar">
+                <div class="label">Python</div>
+                <div class="progress" style="width: 90%"></div>
+            </div>
+            <div class="skill-bar">
+                <div class="label">C++</div>
+                <div class="progress" style="width: 70%"></div>
+            </div>
+            <div class="skill-bar">
+                <div class="label">Django</div>
+                <div class="progress" style="width: 80%"></div>
+            </div>
+            <div class="skill-bar">
+                <div class="label">Machine Learning</div>
+                <div class="progress" style="width: 85%"></div>
+            </div>
+        </div>
     </div>
     <script>
         const canvas = document.createElement('canvas');
@@ -117,7 +200,7 @@
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = '#0f0'; // Зеленый цвет
+            ctx.fillStyle = '#0f0';
             ctx.font = `${fontSize}px monospace`;
 
             for (let i = 0; i < drops.length; i++) {
@@ -138,4 +221,3 @@
     </script>
 </body>
 </html>
-
