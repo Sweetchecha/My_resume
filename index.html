@@ -29,7 +29,6 @@
             position: relative;
             z-index: 1;
             color: #00ff00;
-            opacity: 0;
         }
         h1, p {
             display: inline-block;
@@ -44,6 +43,13 @@
             line-height: 1.8;
             margin-top: 20px;
             animation-delay: 3s;
+        }
+        .python-logo {
+            width: 150px;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeInLogo 2s ease-out forwards;
+            animation-delay: 5s;
         }
         nav {
             position: fixed;
@@ -84,6 +90,16 @@
                 transform: translateY(0);
             }
         }
+        @keyframes fadeInLogo {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -99,6 +115,7 @@
     <div class="content">
         <h1>Привет, я Андрей</h1>
         <p>Добро пожаловать на мой персональный сайт! Я Python разработчик с более чем 3-летним опытом. Исследуйте мои проекты и узнайте больше обо мне.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python Logo" class="python-logo">
     </div>
     <script>
         const canvas = document.createElement('canvas');
