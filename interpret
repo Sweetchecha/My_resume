@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Interpreter</title>
+    <script src="https://unpkg.com/skulpt@1.0.0/skulpt.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ff00;
+            background-color: #000;
+        }
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: black;
+            overflow: hidden;
+        }
+        .content {
+            padding: 80px 40px 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+            color: #00ff00;
+        }
+        h1, p {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInText 2s ease-out forwards;
+        }
+        h1 {
+            font-size: 3rem;
+            animation-delay: 1s;
+        }
+        p {
+            line-height: 1.8;
+            margin-top: 20px;
+            animation-delay: 3s;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #00ff00;
+            color: #000;
+            font-size: 1.2rem;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #00cc00;
+        }
+        pre {
+            background-color: #333;
+            color: #00ff00;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrix"></div>
+    <div class="content">
+        <h1>Python Interpreter</h1>
+        <p>Введите Python код ниже и нажмите кнопку для выполнения.</p>
+        <textarea id="code" rows="10" placeholder="Напишите ваш код здесь..."></textarea><br>
+        <button onclick="runPythonCode()">Run Code</button>
+        <pre id="output"></pre>
+    </div>
+
+    <script>
+        const canvas = document.createElement('canvas');
+        document.getElementById('matrix').appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        const matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0'; // Зеленый цвет
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+                ctx.fillText(char, x, y);
+
+                if (y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        function runPythonCode() {
+            var code = document.getElementById("code").value;
+            var output = document.getElementById("output");
+            output.innerHTML = ""; // Очистить вывод перед новым выполнением
+
+            function outf(text) {
+                output.innerHTML += text;
+            }
+
+            Sk.configure({
+                output: outf,
+                read: function(x) { return ""; } // Заглушка для импорта модулей
+            });
+
+            Sk.misceval.asyncToPromise(function() {
+                return Sk.importMainWithBody("<stdin>", false, code, true);
+            }).catch(function(err) {
+                output.innerHTML = "Ошибка: " + err.toString();
+            });
+        }
+    </script>
+</body>
+</html>
