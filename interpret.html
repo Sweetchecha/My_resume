@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Interpreter</title>
-    <script src="https://unpkg.com/skulpt@1.0.0/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/skulpt-stdlib.js"></script>
     <style>
         body {
             margin: 0;
@@ -136,23 +137,30 @@
         setInterval(draw, 33);
 
         function runPythonCode() {
-            var code = document.getElementById("code").value;
-            var output = document.getElementById("output");
-            output.innerHTML = ""; // Очистить вывод перед новым выполнением
+            const code = document.getElementById("code").value;
+            const output = document.getElementById("output");
+            output.innerHTML = ""; // Очистить вывод перед запуском нового кода
 
             function outf(text) {
-                output.innerHTML += text;
+                output.innerHTML += text; // Добавлять текст в блок вывода
             }
 
-            Sk.configure({
-                output: outf,
-                read: function(x) { return ""; } // Заглушка для импорта модулей
+            function builtinRead(x) {
+                if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined) {
+                    throw new Error("Ошибка импорта файла: " + x);
+                }
+                return Sk.builtinFiles["files"][x];
+            }
+
+            Sk.configure({ 
+                output: outf, 
+                read: builtinRead 
             });
 
             Sk.misceval.asyncToPromise(function() {
                 return Sk.importMainWithBody("<stdin>", false, code, true);
             }).catch(function(err) {
-                output.innerHTML = "Ошибка: " + err.toString();
+                output.innerHTML = "Ошибка выполнения: " + err.toString();
             });
         }
     </script>
