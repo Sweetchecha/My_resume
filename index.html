@@ -23,19 +23,23 @@
         }
         .content {
             padding: 80px 40px 40px;
-            animation: fadeIn 2s ease-in;
+            animation: fadeInText 2s ease-in;
             text-align: center;
             max-width: 800px;
             margin: auto;
             position: relative;
             z-index: 1;
+            color: #fff;
+            opacity: 0;
         }
         h1 {
             font-size: 3rem;
+            animation: fadeInText 3s ease-out forwards;
         }
         p {
             line-height: 1.8;
             margin-bottom: 1.5rem;
+            animation: fadeInText 4s ease-out forwards;
         }
         nav {
             position: fixed;
@@ -66,13 +70,24 @@
         nav ul li a:hover {
             color: #fff;
         }
-        @keyframes fadeIn {
+        @keyframes fadeInText {
             from {
                 opacity: 0;
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
+                transform: translateY(0);
             }
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -89,6 +104,9 @@
     <div class="content">
         <h1>Привет, я Андрей</h1>
         <p>Добро пожаловать на мой персональный сайт! Я Python разработчик с более чем 3-летним опытом. Исследуйте мои проекты и узнайте больше обо мне.</p>
+        <div class="image-container">
+            <img src="blob:https://chatgpt.com/4eb27630-89e9-46a6-8919-5b403c406dc7" alt="My Image">
+        </div>
     </div>
     <script>
         const canvas = document.createElement('canvas');
